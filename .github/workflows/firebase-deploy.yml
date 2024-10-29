@@ -79,7 +79,7 @@ jobs:
 
       - name: Decode Firebase servicre account key
         run: |
-          echo "${{ secrets.GCP_SA_KEY }}" | base64 -d > ,/firebase-key.json
+          echo "${{ secrets.GCP_SA_KEY }}" | base64 -d > ./firebase-key.json
           echo "GOOGLE_APPLICATION_CREDENTIALS=${{ github.workspace }}/firebase-key.json" >> $GITHUB_ENV
 
       - name: Deploy to Firebase
