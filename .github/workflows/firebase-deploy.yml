@@ -84,10 +84,11 @@ jobs:
 
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
-        # with:
-        #   args: deploy --only hosting
+        with:
+          args: deploy --only hosting
         env:
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
       - name: delete GOOGLE_APPLICATION_CREDENTIALS
         run: rm $GOOGLE_APPLICATION_CREDENTIALS
