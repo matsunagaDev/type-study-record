@@ -1,9 +1,11 @@
 import './App.css';
+import { Button, ChakraProvider, defaultSystem } from '@chakra-ui/react';
 
 export const App = () => {
   return (
-    <>
-      <h1>Hello World</h1>
-    </>
+    <ChakraProvider value={defaultSystem}>
+      <h1>Home</h1>
+      <Button colorScheme="teal">ボタン</Button>
+    </ChakraProvider>
   );
 };
