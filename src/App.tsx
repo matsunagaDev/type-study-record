@@ -27,6 +27,7 @@ import {
 import { Field } from './components/ui/field';
 import { GetAllRecords, InsertRecord } from './lib/record';
 import { Record } from './domain/record';
+import { useForm } from 'react-hook-form';
 
 export const App = () => {
   const [records, setRecords] = useState<Record[]>([]);
@@ -36,6 +37,10 @@ export const App = () => {
   const [error, setError] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLInputElement>(null);
+  // react-hook-form
+  const { register } = useForm();
+
+  console.log(`関数の外：${isOpen}`);
 
   // 学習内容のテキストボックス
   const handleTextChange = useCallback(
@@ -52,8 +57,6 @@ export const App = () => {
     },
     [inputStudyTime]
   );
-
-  console.log(`関数の外：${isOpen}`);
 
   // テスト
   const onClickTest = async () => {
@@ -104,13 +107,7 @@ export const App = () => {
 
   return (
     <Provider>
-      <DialogRoot
-        open={isOpen}
-        onOpenChange={(e: boolean) => {
-          setIsOpen(e.isOpen);
-        }}
-        initialFocusEl={() => ref.current}
-      >
+      <DialogRoot initialFocusEl={() => ref.current}>
         <DialogTrigger>
           <Button variant="outline">登録</Button>
         </DialogTrigger>
@@ -140,7 +137,7 @@ export const App = () => {
             </Stack>
           </DialogBody>
           <DialogFooter>
-            <DialogActionTrigger>
+            <DialogActionTrigger asChild>
               <Button
                 variant="outline"
                 onClick={() => {
